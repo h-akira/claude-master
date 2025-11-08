@@ -43,12 +43,12 @@ cp <任意の*.mcp.json> <your-project>/.mcp.json
 
 ## 含まれるMCPサーバー
 
-| サーバー名 | 説明 | GitHub |
-|-----------|------|--------|
-| awslabs.cdk-mcp-server | AWS CDKのサポート | [リンク](https://github.com/awslabs/mcp/tree/main/src/cdk-mcp-server) |
-| awslabs.aws-documentation-mcp-server | AWSドキュメントへのアクセス | [リンク](https://github.com/awslabs/mcp/tree/main/src/aws-documentation-mcp-server) |
-| awslabs.aws-diagram-mcp-server | AWS構成図の生成 | [リンク](https://github.com/awslabs/mcp/tree/main/src/aws-diagram-mcp-server) |
-| context7 | コンテキスト管理ツール | [リンク](https://github.com/upstash/context7) |
+| サーバー名 | 説明 |
+|-----------|------|
+| [awslabs.cdk-mcp-server](https://github.com/awslabs/mcp/tree/main/src/cdk-mcp-server) | AWS CDKのサポート |
+| [awslabs.aws-documentation-mcp-server](https://github.com/awslabs/mcp/tree/main/src/aws-documentation-mcp-server) | AWSドキュメントへのアクセス |
+| [awslabs.aws-diagram-mcp-server](https://github.com/awslabs/mcp/tree/main/src/aws-diagram-mcp-server) | AWS構成図の生成 |
+| [context7](https://github.com/upstash/context7) | コンテキスト管理ツール |
 
 ## 使い方
 
