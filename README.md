@@ -22,11 +22,11 @@ brew install node
 
 ### 2. MCP設定ファイルの配置
 
-プロジェクトのルートディレクトリに`.mcp.json`をコピーします：
+このリポジトリから任意の`*.mcp.json`を選んでプロジェクトのルートディレクトリにコピーします：
 
 ```bash
 # プロジェクトルートにMCP設定ファイルをコピー
-cp dot.mcp.json <your-project>/.mcp.json
+cp <任意の*.mcp.json> <your-project>/.mcp.json
 ```
 
 ### 3. API キーの設定（必要に応じて）
