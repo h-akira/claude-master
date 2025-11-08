@@ -20,21 +20,18 @@ brew install uv
 brew install node
 ```
 
-### 2. MCP設定ファイルのコピー
+### 2. MCP設定ファイルの配置
 
-ClaudeCodeの設定ディレクトリにMCP設定ファイルをコピーします：
+プロジェクトのルートディレクトリに`.mcp.json`をコピーします：
 
 ```bash
-# Claude設定ディレクトリを作成（存在しない場合）
-mkdir -p ~/.claude
-
-# MCP設定ファイルをコピー
-cp dot.mcp.json ~/.claude/mcp.json
+# プロジェクトルートにMCP設定ファイルをコピー
+cp dot.mcp.json <your-project>/.mcp.json
 ```
 
 ### 3. API キーの設定（必要に応じて）
 
-`~/.claude/mcp.json`を編集し、必要なAPIキーを設定してください：
+`<your-project>/.mcp.json`を編集し、必要なAPIキーを設定してください：
 
 ```json
 "context7": {
