@@ -29,9 +29,11 @@ brew install node
 cp <任意の*.mcp.json> <your-project>/.mcp.json
 ```
 
-### 3. API キーの設定（必要に応じて）
+### 3. 固有の設定
 
-`<your-project>/.mcp.json`を編集し、必要なAPIキーを設定してください：
+#### Context7のAPIキー設定
+
+Context7を使用する場合は、`<your-project>/.mcp.json`を編集してAPIキーを設定してください：
 
 ```json
 "context7": {
