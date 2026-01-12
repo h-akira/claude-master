@@ -4,11 +4,13 @@ ClaudeCodeを利用するための設定ファイルを管理するリポジト�
 
 ## 概要
 
-このリポジトリには、ClaudeCodeで使用するMCP（Model Context Protocol）サーバーの設定が含まれています。
+このリポジトリには、ClaudeCodeで使用する以下のファイルが含まれています：
 
-## セットアップ
+- **MCP設定ファイル**: MCPサーバーの接続設定
+- **CLAUDE.mdサンプル**: プロジェクト固有のコンテキスト定義
+- **Agent Skills**: カスタムスキルの拡張
 
-### 1. 必要なツールのインストール
+## 必要なツールのインストール
 
 macOS（Homebrew使用）での環境構築手順：
 
@@ -20,18 +22,42 @@ brew install uv
 brew install node
 ```
 
-### 2. MCP設定ファイルの配置
+## CLAUDE.mdの設定
 
-このリポジトリから任意の`*.mcp.json`を選んでプロジェクトのルートディレクトリにコピーします：
+プロジェクト固有のコンテキストを定義するため、CLAUDE.mdサンプルをプロジェクトのルートディレクトリに配置します。
+
+### 配置方法
+
+シンボリックリンクを使用して配置します：
+
+```bash
+# プロジェクトルートでの作業を想定
+cd <your-project>
+
+# シンボリックリンクを作成
+ln -sf <claude-master>/CLAUDE_MD/basic_CLAUDE.md CLAUDE.md
+```
+
+### 含まれるサンプル
+
+- `basic_CLAUDE.md`: 基本的なプロジェクトコンテキストのテンプレート
+
+## MCP設定
+
+MCPサーバーへの接続設定を行います。
+
+### 配置方法
+
+MCP設定ファイルをプロジェクトのルートディレクトリにコピーして編集します：
 
 ```bash
 # プロジェクトルートにMCP設定ファイルをコピー
-cp <任意の*.mcp.json> <your-project>/.mcp.json
+cp <claude-master>/MCP/all.mcp.json <your-project>/.mcp.json
+
+# 必要に応じて編集（特にAPIキーなど）
 ```
 
-### 3. 固有の設定
-
-#### Context7のAPIキー設定
+### Context7のAPIキー設定
 
 Context7を使用する場合は、`<your-project>/.mcp.json`を編集してAPIキーを設定してください：
 
@@ -43,7 +69,7 @@ Context7を使用する場合は、`<your-project>/.mcp.json`を編集してAPI�
 }
 ```
 
-## 含まれるMCPサーバー
+### 含まれるMCPサーバー
 
 | サーバー名 | 説明 |
 |-----------|------|
@@ -52,9 +78,41 @@ Context7を使用する場合は、`<your-project>/.mcp.json`を編集してAPI�
 | [awslabs.aws-diagram-mcp-server](https://github.com/awslabs/mcp/tree/main/src/aws-diagram-mcp-server) | AWS構成図の生成 |
 | [context7](https://github.com/upstash/context7) | コンテキスト管理ツール |
 
+## Agent Skillsの設定
+
+カスタムスキルを追加してClaudeCodeの機能を拡張します。
+
+### 配置方法
+
+シンボリックリンクを使用して`.claude/skills/`ディレクトリに配置します：
+
+```bash
+# .claude/skills/ディレクトリが存在しない場合は作成
+mkdir -p <your-project>/.claude/skills/
+
+# スキルのシンボリックリンクを作成
+ln -sf <claude-master>/skills/mermaid-aws-diagram <your-project>/.claude/skills/mermaid-aws-diagram
+```
+
+### 含まれるスキル
+
+- `mermaid-aws-diagram`: Mermaid形式でAWS構成図を生成するスキル
+
+## ディレクトリ構成
+
+```
+claude-master/
+├── CLAUDE_MD/          # CLAUDE.mdのサンプルファイル
+│   └── basic_CLAUDE.md
+├── MCP/                # MCP設定ファイル
+│   └── all.mcp.json
+└── skills/             # Agent Skills
+    └── mermaid-aws-diagram/
+```
+
 ## 使い方
 
-設定完了後、ClaudeCodeを起動すれば自動的にMCPサーバーが読み込まれます。
+設定完了後、ClaudeCodeを起動すれば自動的にMCPサーバーとスキルが読み込まれます。
 
 ```bash
 claude
