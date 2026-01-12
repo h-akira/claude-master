@@ -126,13 +126,30 @@ color: #000
 
 #### Special Purpose Subnets
 
-For Firewall Subnet, TGW Attach Subnet, and other special purpose subnets, use private subnet colors unless there's a specific reason to distinguish them.
+For Firewall Subnet, TGW Attach Subnet, and other infrastructure-related subnets:
+
+```
+fill: #E8EAED
+stroke: #5F6368
+stroke-width: 3px
+color: #000
+```
+
+**Applies to:**
+- Firewall Subnet - Network Firewall endpoint subnets
+- TGW Attach Subnet - Transit Gateway attachment subnets
+- Other infrastructure-only subnets
+
+**Color rationale:**
+- Light gray (#E8EAED): Neutral, infrastructure-focused color
+- Dark gray border (#5F6368): Clearly distinguishes from application subnets
 
 ## Important Principles
 
 1. **Same type uses same color**
    - If Subnet A and Subnet B are both Public Subnets, both use the same green color
    - If Subnet A and Subnet B are both Private Subnets, both use the same yellow color
+   - If Subnet A and Subnet B are both Special Purpose Subnets, both use the same gray color
    - VPC-A and VPC-B both use the same VPC blue color
 
 2. **High contrast**
@@ -249,6 +266,8 @@ style vpc_xxx fill:#D6EAF8,stroke:#154360,stroke-width:5px,color:#000
 style subnet_public_xxx fill:#D5F4E6,stroke:#0E6A3A,stroke-width:3px,color:#000
 style subnet_private_xxx fill:#FFF9E6,stroke:#D4A017,stroke-width:3px,color:#000
 style subnet_data_xxx fill:#FFF9E6,stroke:#D4A017,stroke-width:3px,color:#000
+style subnet_firewall_xxx fill:#E8EAED,stroke:#5F6368,stroke-width:3px,color:#000
+style subnet_tgw_xxx fill:#E8EAED,stroke:#5F6368,stroke-width:3px,color:#000
 ```
 
 ## AWS Service Colors (Resource Level)

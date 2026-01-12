@@ -125,10 +125,14 @@ Key colors:
 - **VPC**: `fill:#D6EAF8,stroke:#154360,stroke-width:5px,color:#000`
 - **Public Subnet**: `fill:#D5F4E6,stroke:#0E6A3A,stroke-width:3px,color:#000` (green)
 - **Private/Data Subnet**: `fill:#FFF9E6,stroke:#D4A017,stroke-width:3px,color:#000` (yellow)
+- **Special Purpose Subnet**: `fill:#E8EAED,stroke:#5F6368,stroke-width:3px,color:#000` (gray)
 
 **Important principles:**
-- **Color-code by subnet type**: Public subnets use green, Private/Data subnets use yellow
-- Same subnet type = same color (all Public subnets green, all Private subnets yellow)
+- **Color-code by subnet type**:
+  - Public subnets use green
+  - Private/Data subnets use yellow
+  - Special purpose subnets (Firewall, TGW Attach) use gray
+- Same subnet type = same color
 - Same hierarchy level (VPC, AZ) = same color regardless of instance
 
 **B. AWS Services (resources)**
@@ -342,6 +346,7 @@ graph LR
 2. **Subnet color-coding**:
    - Public subnets use green (`#D5F4E6` / `#0E6A3A`)
    - Private/Data subnets use yellow (`#FFF9E6` / `#D4A017`)
+   - Special purpose subnets use gray (`#E8EAED` / `#5F6368`) - Firewall, TGW Attach
    - All subnets of the same type use the same color
 3. **Protocol labels**: Always include protocol and port (e.g., `HTTPS:443`, `PostgreSQL:5432`)
 4. **High contrast**: Always use `color:#000` for subgraph text

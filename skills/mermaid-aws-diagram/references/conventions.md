@@ -131,8 +131,14 @@ class vpce_1,nfw_ep_1 endpoint
 
 See `colors.md` for details.
 
+**Subnet color-coding:**
+- Public Subnet: Green (`#D5F4E6` / `#0E6A3A`)
+- Private/Data Subnet: Yellow (`#FFF9E6` / `#D4A017`)
+- Special Purpose Subnet: Gray (`#E8EAED` / `#5F6368`) - Firewall, TGW Attach
+
 **Important principles:**
 - Same type uses same color (VPC-A and VPC-B both use same VPC color)
+- Same subnet type uses same color (all Public subnets green, all Private yellow, all Special gray)
 - High contrast (`color:#000` for black text)
 - Border 3px or thicker
 
