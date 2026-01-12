@@ -152,7 +152,7 @@ classDef endpoint fill:#5DADE2,stroke:#1B4F72,stroke-width:2px,color:#fff
 
 For basic diagrams, metadata is optional. Include only when needed for IaC generation:
 
-```mermaid
+```
 graph LR
     %% @diagram
     %% name: Production Web Service
