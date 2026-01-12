@@ -6,7 +6,7 @@ For complete details, refer to the original file.
 ## 1. Basic Syntax
 
 ### Diagram Type
-```mermaid
+```
 graph LR  %% Left to Right (flexible choice)
 graph TB  %% Top to Bottom (flexible choice)
 ```
@@ -42,7 +42,7 @@ graph TB  %% Top to Bottom (flexible choice)
 ## 3. Edges (Connections)
 
 ### Basic Syntax
-```mermaid
+```
 alb -->|HTTPS:443| ec2        %% Normal (synchronous)
 ec2 -.->|Async| sqs            %% Asynchronous (dotted)
 lambda ==>|Main| dynamodb      %% Primary flow (thick)
@@ -93,7 +93,7 @@ graph LR
 ```
 
 ### Resource Metadata (Only for detailed design)
-```mermaid
+```
     %% @resource
     %% id: ec2_1_web
     %% type: aws.ec2.instance
@@ -109,7 +109,7 @@ They can be omitted in basic architecture diagrams.
 ## 6. Styling
 
 ### AWS Service Colors (Resource Level)
-```mermaid
+```
 %% Color definitions
 classDef compute fill:#FF9900,stroke:#232F3E,stroke-width:2px,color:#fff
 classDef database fill:#3B48CC,stroke:#232F3E,stroke-width:2px,color:#fff

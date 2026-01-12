@@ -254,7 +254,7 @@ graph TB
 
 Add the following at the end of Mermaid diagrams:
 
-```mermaid
+```
 %% Hierarchy Colors
 style org_xxx fill:#F0F0F0,stroke:#2C3E50,stroke-width:6px,color:#000
 style account_xxx fill:#E8F4F8,stroke:#1F618D,stroke-width:5px,color:#000

@@ -83,7 +83,7 @@ Match AWS service types:
 ### 5. Define Connections
 
 **Protocol notation:**
-```mermaid
+```
 alb -->|HTTPS:443| ec2        # Synchronous
 ec2 -.->|Async| sqs            # Asynchronous (dotted)
 lambda ==>|Main| dynamodb      # Primary flow (thick)
@@ -95,7 +95,7 @@ Always include protocol and port in edge labels.
 
 Default Mermaid arrow colors are light and hard to see. Specify darker colors for important connections:
 
-```mermaid
+```
 %% Normal traffic flow
 alb -->|HTTPS:443| ec2
 
@@ -137,7 +137,7 @@ Key colors:
 
 **B. AWS Services (resources)**
 
-```mermaid
+```
 classDef compute fill:#FF9900,stroke:#232F3E,stroke-width:2px,color:#fff
 classDef database fill:#3B48CC,stroke:#232F3E,stroke-width:2px,color:#fff
 classDef storage fill:#1E8900,stroke:#232F3E,stroke-width:2px,color:#fff
