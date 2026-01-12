@@ -35,7 +35,7 @@ brew install node
 cd <your-project>
 
 # シンボリックリンクを作成
-ln -sf <claude-master>/CLAUDE_MD/basic_CLAUDE.md CLAUDE.md
+ln -sf <claude-master>/CLAUDE_md/basic_CLAUDE.md CLAUDE.md
 ```
 
 ### 含まれるサンプル
@@ -52,7 +52,7 @@ MCP設定ファイルをプロジェクトのルートディレクトリにコ�
 
 ```bash
 # プロジェクトルートにMCP設定ファイルをコピー
-cp <claude-master>/MCP/all.mcp.json <your-project>/.mcp.json
+cp <claude-master>/mcp_json/all.mcp.json <your-project>/.mcp.json
 
 # 必要に応じて編集（特にAPIキーなど）
 ```
@@ -102,9 +102,9 @@ ln -sf <claude-master>/skills/mermaid-aws-diagram <your-project>/.claude/skills/
 
 ```
 claude-master/
-├── CLAUDE_MD/          # CLAUDE.mdのサンプルファイル
+├── CLAUDE_md/          # CLAUDE.mdのサンプルファイル
 │   └── basic_CLAUDE.md
-├── MCP/                # MCP設定ファイル
+├── mcp_json/           # MCP設定ファイル
 │   └── all.mcp.json
 └── skills/             # Agent Skills
     └── mermaid-aws-diagram/
