@@ -34,8 +34,10 @@
 - 特別な指示がない限りは`git push`は禁止（ユーザーが自分で実行する）
 - `--force`オプションの使用は原則禁止
 - 機密ファイル（`.env`等）やビルド成果物（`dist/`, `build/`, `*.pyc`等）は`git add`しない（`.gitignore`で管理する）
-
-## コミットメッセージ
-- Conventional Commits形式を使用する
+- コミットメッセージはConventional Commits形式を使用する
   - `feat:` 新機能, `fix:` バグ修正, `docs:` ドキュメント, `refactor:` リファクタリング, `test:` テスト, `chore:` その他
-- メッセージ本文は英語で書く
+- コミットメッセージ本文は英語で書く
+
+## Python
+- 外部ライブラリを使う場合は `python -m venv env` で仮想環境を作成する
+- すでに `env/` が存在する場合はそれを使用する
