@@ -201,6 +201,15 @@ def render_markdown(records, options):
         tool_result = rec.get("toolUseResult", {})
         if isinstance(tool_result, str):
           output = tool_result
+        elif isinstance(tool_result, list):
+          # Some tools (e.g. browser/MCP tools) return a list of content blocks
+          parts = []
+          for item in tool_result:
+            if isinstance(item, dict) and item.get("type") == "text":
+              parts.append(item.get("text", ""))
+            elif isinstance(item, str):
+              parts.append(item)
+          output = "\n".join(p for p in parts if p)
         else:
           stdout = tool_result.get("stdout", "")
           stderr = tool_result.get("stderr", "")
