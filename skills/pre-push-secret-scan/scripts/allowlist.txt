@@ -1,0 +1,107 @@
+# Allowlist for pre-push-secret-scan.
+# Only publicly well-known, non-identifying entries belong here.
+# NEVER add a private / customer / self-managed domain to this file:
+# this file is committed to a public repository.
+#
+# [hosts]       : host suffixes ignored by the domain / url / email rules.
+#                 "example.com" also matches "api.example.com".
+# [placeholders]: substrings (case-insensitive) that mark a value as a dummy,
+#                 used to suppress the generic secret-assignment rule.
+
+[hosts]
+# documentation / RFC reserved
+example.com
+example.org
+example.net
+example.jp
+example.co.jp
+localhost
+localhost.localdomain
+invalid
+test
+# code hosting / package registries
+github.com
+github.io
+githubusercontent.com
+gitlab.com
+bitbucket.org
+npmjs.com
+npmjs.org
+pypi.org
+crates.io
+rubygems.org
+packagist.org
+maven.org
+nuget.org
+hub.docker.com
+# language / framework / tooling
+python.org
+nodejs.org
+golang.org
+go.dev
+rust-lang.org
+java.com
+oracle.com
+docker.com
+kubernetes.io
+terraform.io
+hashicorp.com
+apache.org
+gnu.org
+opensource.org
+json-schema.org
+schema.org
+w3.org
+ietf.org
+readthedocs.io
+readthedocs.org
+mermaid.js.org
+jsdelivr.net
+unpkg.com
+# vendors / references
+amazon.com
+google.com
+googleapis.com
+microsoft.com
+visualstudio.com
+jetbrains.com
+mozilla.org
+stackoverflow.com
+wikipedia.org
+anthropic.com
+claude.ai
+openai.com
+slack.com
+atlassian.com
+cloudflare.com
+letsencrypt.org
+ubuntu.com
+debian.org
+brew.sh
+
+[placeholders]
+example
+sample
+dummy
+changeme
+change_me
+placeholder
+your-
+your_
+yourname
+xxxx
+todo
+redacted
+masked
+notreal
+fake
+test-value
+<
+${
+{{
+os.environ
+os.getenv
+process.env
+getenv(
+secrets.
+vars.
