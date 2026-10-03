@@ -7,7 +7,7 @@ ClaudeCodeを利用するための設定ファイルを管理するリポジト�
 このリポジトリには、ClaudeCodeで使用する以下のファイルが含まれています：
 
 - **MCP設定ファイル**: MCPサーバーの接続設定
-- **CLAUDE.mdサンプル**: プロジェクト固有のコンテキスト定義
+- **CLAUDE.mdサンプル**: ホームディレクトリ用などのコンテキスト定義
 - **Agent Skills**: カスタムスキルの拡張
 
 ## 必要なツールのインストール
@@ -24,59 +24,27 @@ brew install node
 
 ## CLAUDE.mdの設定
 
-プロジェクト固有のコンテキストを定義するため、CLAUDE.mdサンプルをプロジェクトのルートディレクトリに配置します。
+ClaudeCodeのコンテキストを定義するため、`CLAUDE_MD/`配下のサンプルを配置します。ホームディレクトリ用・プロジェクト用など、用途の異なるサンプルが今後追加される可能性があります。
 
 ### 配置方法
 
-シンボリックリンクを使用して配置します：
+配置先はサンプルの用途（ホームディレクトリ用かプロジェクト用か）によって異なります。シンボリックリンクまたはコピーで配置し、どちらを使うかも用途に応じてユーザーが判断してください（例: 複数環境で内容を同期したい場合はシンボリックリンク、配置先ごとに内容を個別にカスタマイズしたい場合はコピー）。
 
 ```bash
-# プロジェクトルートでの作業を想定
-cd <your-project>
+# 例: basic_CLAUDE.md（ホームディレクトリ用）をシンボリックリンクで配置
+ln -sf <claude-master>/CLAUDE_MD/basic_CLAUDE.md ~/.claude/CLAUDE.md
 
-# シンボリックリンクを作成
-ln -sf <claude-master>/CLAUDE_md/basic_CLAUDE.md CLAUDE.md
+# 例: プロジェクト用サンプルをコピーでプロジェクトルートに配置
+cp <claude-master>/CLAUDE_MD/<sample>.md <your-project>/CLAUDE.md
 ```
 
 ### 含まれるサンプル
 
-- `basic_CLAUDE.md`: 基本的なプロジェクトコンテキストのテンプレート
+- `basic_CLAUDE.md`: ホームディレクトリ用（`~/.claude/CLAUDE.md`）の基本的なコンテキストテンプレート
 
 ## MCP設定
 
-MCPサーバーへの接続設定を行います。
-
-### 配置方法
-
-MCP設定ファイルをプロジェクトのルートディレクトリにコピーして編集します：
-
-```bash
-# プロジェクトルートにMCP設定ファイルをコピー
-cp <claude-master>/mcp_json/all.mcp.json <your-project>/.mcp.json
-
-# 必要に応じて編集（特にAPIキーなど）
-```
-
-### Context7のAPIキー設定
-
-Context7を使用する場合は、`<your-project>/.mcp.json`を編集してAPIキーを設定してください：
-
-```json
-"context7": {
-  "env": {
-    "CONTEXT7_API_KEY": "YOUR_API_KEY"  // 実際のAPIキーに置き換え
-  }
-}
-```
-
-### 含まれるMCPサーバー
-
-| サーバー名 | 説明 |
-|-----------|------|
-| [awslabs.cdk-mcp-server](https://github.com/awslabs/mcp/tree/main/src/cdk-mcp-server) | AWS CDKのサポート |
-| [awslabs.aws-documentation-mcp-server](https://github.com/awslabs/mcp/tree/main/src/aws-documentation-mcp-server) | AWSドキュメントへのアクセス |
-| [awslabs.aws-diagram-mcp-server](https://github.com/awslabs/mcp/tree/main/src/aws-diagram-mcp-server) | AWS構成図の生成 |
-| [context7](https://github.com/upstash/context7) | コンテキスト管理ツール |
+MCPサーバーへの接続設定です。配置方法（プロジェクトスコープ/ユーザースコープ）、含まれるサーバー一覧、Context7のAPIキー設定などの詳細は[mcp/README.md](mcp/README.md)を参照してください。
 
 ## Agent Skillsの設定
 
@@ -97,17 +65,35 @@ ln -sf <claude-master>/skills/mermaid-aws-diagram <your-project>/.claude/skills/
 ### 含まれるスキル
 
 - `mermaid-aws-diagram`: Mermaid形式でAWS構成図を生成するスキル
+- `pre-push-secret-scan`: git push前に未公開コミットから機密情報（認証情報、AWSアカウントID、独自ドメイン、メールアドレス等）を検出するスキル
+- `safe-git-commit`: 個別ファイル指定または`git add -u`のみ許可する等、安全なgit staging/commitワークフローを提供するスキル
+
+## utilsディレクトリ
+
+ClaudeCodeの利用状況を調べる・作業を補助するスクリプト群です。各スクリプトの使い方は[utils/README.md](utils/README.md)を参照してください。
 
 ## ディレクトリ構成
 
 ```
 claude-master/
-├── CLAUDE_md/          # CLAUDE.mdのサンプルファイル
+├── CLAUDE.md           # このリポジトリ自体の規約
+├── CLAUDE_MD/          # CLAUDE.mdのサンプルファイル
 │   └── basic_CLAUDE.md
-├── mcp_json/           # MCP設定ファイル
+├── mcp/                # MCP設定ファイル
+│   ├── README.md
 │   └── all.mcp.json
-└── skills/             # Agent Skills
-    └── mermaid-aws-diagram/
+├── skills/             # Agent Skills
+│   ├── mermaid-aws-diagram/
+│   ├── pre-push-secret-scan/
+│   └── safe-git-commit/
+├── utils/              # 補助スクリプト
+│   ├── README.md
+│   └── bin/
+│       ├── cc_dir_usage.sh
+│       ├── cc_history2md.py
+│       ├── cc_times.py
+│       └── commit_by_claude.sh
+└── tmp/               # 一時ファイル置き場（.gitignoreで除外）
 ```
 
 ## 使い方
