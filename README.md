@@ -48,19 +48,41 @@ MCPサーバーへの接続設定です。配置方法（プロジェクトス�
 
 ## Agent Skillsの設定
 
-カスタムスキルを追加してClaudeCodeの機能を拡張します。
+カスタムスキルを追加してClaudeCodeの機能を拡張します。スキルはオープン標準（[Agent Skills](https://agentskills.io/)）の形式なので、同じ`SKILL.md`がGitHub Copilot（VS Code、Copilot CLI、cloud agentなど）でも使えます。
 
 ### 配置方法
 
-シンボリックリンクを使用して`.claude/skills/`ディレクトリに配置します：
+スキルのディレクトリをシンボリックリンクまたはコピーで配置します。どちらを使うかは用途に応じてユーザーが判断してください。
+
+| 種類 | 配置先 | 読み込まれるツール |
+|---|---|---|
+| プロジェクト用 | `<your-project>/.claude/skills/` | ClaudeCode、GitHub Copilot |
+| プロジェクト用 | `<your-project>/.github/skills/` | GitHub Copilot |
+| 個人用（全プロジェクト共通） | `~/.claude/skills/` | ClaudeCode、GitHub Copilot |
+| 個人用（全プロジェクト共通） | `~/.copilot/skills/` | GitHub Copilot |
+
+`.claude/skills/`に置けば、ClaudeCodeとGitHub Copilotの両方に反映されます。ClaudeCodeでは使わない場合に限り、Copilot専用の`.github/skills/`や`~/.copilot/skills/`も使えます。
 
 ```bash
 # .claude/skills/ディレクトリが存在しない場合は作成
 mkdir -p <your-project>/.claude/skills/
 
-# スキルのシンボリックリンクを作成
+# シンボリックリンクの場合
 ln -sf <claude-master>/skills/mermaid-aws-diagram <your-project>/.claude/skills/mermaid-aws-diagram
+
+# コピーの場合
+cp -R <claude-master>/skills/mermaid-aws-diagram <your-project>/.claude/skills/mermaid-aws-diagram
 ```
+
+- 配置先のディレクトリ名は、`SKILL.md`の`name`と同じにしてください。Copilotは一致しないスキルを、エラーを出さずに読み込みません。
+- GitHub Copilotがシンボリックリンクを辿るかは、公式ドキュメントに記載がありません。読み込まれない場合はコピーを使ってください。
+
+### 使い方
+
+- **自動**: 依頼内容が`SKILL.md`の`description`に合うと、自動で読み込まれます。
+- **手動**: チャットで`/スキル名`と入力します。続けて指示も書けます（例: `/safe-git-commit`）。VS Codeでは`/`だけで一覧が出ます。
+
+詳細は公式ドキュメント（[GitHub Docs](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)、[VS Code](https://code.visualstudio.com/docs/copilot/customization/agent-skills)）を参照してください。
 
 ### 含まれるスキル
 
