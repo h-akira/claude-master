@@ -38,6 +38,19 @@ Exit codes: `0` no findings, `1` findings, `2` error.
 If the report says no remote is configured, every commit is in range — mention that, because the
 result will be large and mostly historical.
 
+The script scans one repository only. A submodule change shows up in the parent's diff as a bare
+`Subproject commit <sha>` line, so the submodule's own commits are not scanned. If the repository
+has submodules (`.gitmodules` exists or `git submodule status --recursive` lists any), also run the
+script inside each one, so each is judged against its own remotes:
+
+```bash
+git submodule foreach --recursive 'python3 <skill dir>/scripts/scan_unpushed.py || true'
+```
+
+`|| true` keeps `foreach` going when a submodule has findings (exit code `1`). Use an absolute path
+for `<skill dir>`, because `foreach` runs the command from inside each submodule. Pass the same
+flags to every run, except `--base`, which names a revision in one repository only.
+
 ### 2. Triage
 
 Read `references/patterns.md` for what each rule means and how to separate real leaks from noise.
@@ -55,7 +68,8 @@ occurrences of the same domain are one finding with a count.
 
 Report in the language the developer is using. Structure:
 
-1. **Range**: how many unpushed commits, which ones.
+1. **Range**: how many unpushed commits, which ones. With submodules, give the range for each
+   repository and label every finding with the repository it came from.
 2. **Must fix**: real credentials, account IDs, private hosts, files that should be gitignored.
    For each: what it is, where (`<short sha> <path>:<line>`), and why it matters.
 3. **Check please**: candidates whose status depends on intent — sample values, third-party
