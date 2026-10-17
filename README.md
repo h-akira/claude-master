@@ -36,13 +36,17 @@ ln -sf <claude-master>/CLAUDE_MD/basic_CLAUDE.md ~/.claude/CLAUDE.md
 
 # 例: プロジェクト用サンプルをコピーでプロジェクトルートに配置
 cp <claude-master>/CLAUDE_MD/<sample>.md <your-project>/CLAUDE.md
+
+# 例: superpowers 用の組（CLAUDE.md と PROJECT.md）をコピーで配置
+cp <claude-master>/CLAUDE_MD/superpowers_CLAUDE.md <your-project>/CLAUDE.md
+cp <claude-master>/CLAUDE_MD/superpowers_PROJECT.md <your-project>/PROJECT.md
 ```
 
 ### 含まれるサンプル
 
 - `basic_CLAUDE.md`: ホームディレクトリ用（`~/.claude/CLAUDE.md`）の基本的なコンテキストテンプレート
-- `superpowers_CLAUDE.md`: superpowers プラグインを使うプロジェクト用の CLAUDE.md テンプレート。`basic_CLAUDE.md` が無い環境（devcontainer など）でも単独で成り立つ。プロジェクトルートに `CLAUDE.md` としてコピーする
-- `superpowers_PROJECT.md`: `superpowers_CLAUDE.md` と組で使う `PROJECT.md`（サブプロジェクトと plan の状態・次にやること・持ち越し）の雛形。プロジェクトルートに `PROJECT.md` としてコピーする
+- `superpowers_CLAUDE.md`: superpowers プラグインを使うプロジェクト用の CLAUDE.md テンプレート。`basic_CLAUDE.md` が無い環境（devcontainer など）でも単独で成り立ち、書き換えずにそのまま使える。プロジェクトルートに `CLAUDE.md` としてコピーする
+- `superpowers_PROJECT.md`: `superpowers_CLAUDE.md` と組で使う `PROJECT.md` の雛形。セッションを切り替えても、永続されていないこと（サブプロジェクトと plan の状態・次にやること・持ち越し）が失われないようにする置き場で、AI が編集する前提のため `<...>` と編集の指針のコメントを含む。プロジェクトルートに `PROJECT.md` としてコピーする
 
 ## MCP設定
 
@@ -101,7 +105,7 @@ ClaudeCodeの利用状況を調べる・作業を補助するスクリプト群�
 ```
 claude-master/
 ├── CLAUDE.md           # このリポジトリ自体の規約
-├── CLAUDE_MD/          # CLAUDE.mdのサンプルファイル
+├── CLAUDE_MD/          # CLAUDE.mdのサンプルと、組で使う雛形
 │   ├── basic_CLAUDE.md
 │   ├── superpowers_CLAUDE.md
 │   └── superpowers_PROJECT.md
