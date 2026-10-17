@@ -24,7 +24,7 @@ brew install node
 
 ## CLAUDE.mdの設定
 
-ClaudeCodeのコンテキストを定義するため、`CLAUDE_MD/`配下のサンプルを配置します。ホームディレクトリ用・プロジェクト用など、用途の異なるサンプルが今後追加される可能性があります。
+ClaudeCodeのコンテキストを定義するため、`CLAUDE_MD/`配下のサンプル（CLAUDE.md と、それと組で使う雛形）を配置します。ホームディレクトリ用・プロジェクト用など、用途の異なるサンプルが今後追加される可能性があります。
 
 ### 配置方法
 
@@ -41,6 +41,8 @@ cp <claude-master>/CLAUDE_MD/<sample>.md <your-project>/CLAUDE.md
 ### 含まれるサンプル
 
 - `basic_CLAUDE.md`: ホームディレクトリ用（`~/.claude/CLAUDE.md`）の基本的なコンテキストテンプレート
+- `superpowers_CLAUDE.md`: superpowers プラグインを使うプロジェクト用の CLAUDE.md テンプレート。`basic_CLAUDE.md` が無い環境（devcontainer など）でも単独で成り立つ。プロジェクトルートに `CLAUDE.md` としてコピーする
+- `superpowers_PROJECT.md`: `superpowers_CLAUDE.md` と組で使う `PROJECT.md`（サブプロジェクトと plan の状態・次にやること・持ち越し）の雛形。プロジェクトルートに `PROJECT.md` としてコピーする
 
 ## MCP設定
 
@@ -100,7 +102,9 @@ ClaudeCodeの利用状況を調べる・作業を補助するスクリプト群�
 claude-master/
 ├── CLAUDE.md           # このリポジトリ自体の規約
 ├── CLAUDE_MD/          # CLAUDE.mdのサンプルファイル
-│   └── basic_CLAUDE.md
+│   ├── basic_CLAUDE.md
+│   ├── superpowers_CLAUDE.md
+│   └── superpowers_PROJECT.md
 ├── mcp/                # MCP設定ファイル
 │   ├── README.md
 │   └── all.mcp.json
