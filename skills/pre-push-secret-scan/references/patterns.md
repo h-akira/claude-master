@@ -77,8 +77,10 @@ it requires seeing it.
 | `local-user-path` | low | `/Users/<name>/…`, `/home/<name>/…` |
 
 Suppressed automatically: values containing a placeholder token from `[placeholders]` in
-`allowlist.txt` (`example`, `dummy`, `your-`, `os.environ`, `process.env`, `${`, …), hosts under
-`[hosts]`, private/loopback IPs, and duplicate matches of the same value at the same location.
+`allowlist.txt` (`example`, `dummy`, `your-`, `os.environ`, `process.env`, `${`, …), unquoted
+secret-assignment values containing `(` (a call such as `apiKey = loadKey(path)`), hosts under
+`[hosts]`, host-like code member access (`java.io.File`, `import java.io.*`, `w.store.save(`),
+private/loopback IPs, and duplicate matches of the same value at the same location.
 
 Content scanning is skipped entirely for lockfiles, `*.min.js`, `*.map`, and paths inside
 `node_modules/`, `vendor/`, `dist/`, `build/` — but the *path* rules still fire for those.

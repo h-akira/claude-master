@@ -156,9 +156,11 @@ CONTENT_RULES: list[ContentRule] = [
               r"\b[A-Za-z0-9][A-Za-z0-9._-]*\.(?:amazonaws\.com(?:\.cn)?|cloudfront\.net|"
               r"awsapps\.com|amplifyapp\.com|elasticbeanstalk\.com|awsstatic\.com)\b",
               "AWS-hosted endpoint; identifies deployed resources."),
+  # The lookarounds reject code member access such as "java.io.File" or "w.store.save(".
   ContentRule("managed-host", MEDIUM,
-              r"\b(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+"
-              r"(?:com|net|org|io|jp|dev|app|co|ai|cloud|tech|xyz|work|team|online|store|shop)\b",
+              r"(?<![\w.-])(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+"
+              r"(?:com|net|org|io|jp|dev|app|co|ai|cloud|tech|xyz|work|team|online|store|shop)"
+              r"(?![\w(-]|\.[\w*])",
               "Hostname / domain; verify it is not a self-managed domain."),
   ContentRule("email-address", MEDIUM,
               r"\b[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}\b",
@@ -335,6 +337,9 @@ def scan_text(
           continue
         if re.fullmatch(r"[\W_]+", value):
           continue
+        quoted = text[match.start(1) - 1:match.start(1)] in ("'", '"')
+        if not quoted and "(" in value:
+          continue  # e.g. "apiKeys = ApiKeyStore(store, ...)": a call, not a literal
       if rule.name in ("managed-host", "email-address", "aws-resource-host"):
         host = value.split("@")[-1]
         if host_allowed(host, hosts):
